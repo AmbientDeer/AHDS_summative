@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Directory containing the downloaded XML files
-input_dir="/Users/linzexuan/Downloads/Uni/Bristol/Data science summative/data/raw"
-output_dir="/Users/linzexuan/Downloads/Uni/Bristol/Data science summative/data/clean"
+input_dir="raw"
+output_dir="clean"
 output_file="$output_dir/processed_articles.tsv"
 
 # Ensure the output directory exists
