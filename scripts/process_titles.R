@@ -1,3 +1,10 @@
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+
+install.packages("tidytext")
+install.packages("NLP")
+install.packages("tm")
+
 # Load libraries
 library(tidytext)
 library(dplyr)

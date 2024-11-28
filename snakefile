@@ -1,3 +1,13 @@
+# Workflow execution order
+
+rule all:
+    input:
+        "raw/pmids.xml",                        # Output of download_data
+        "clean/processed_articles.tsv",         # Output of process_data
+        "clean/processed_articles_final.tsv",   # Output of process_titles
+        "plot/Word_Frequency_Trends.png"        # Output of word_frequency_trend
+
+
 # Rule to download raw data
 rule download_data:
     output:
@@ -38,7 +48,11 @@ rule word_frequency_trend:
     script:
         "scripts/word_frequency_trend.R"
 
-# Workflow execution order
-rule all:
-    input:
-	"plot/Word_Frequency_Trends.png"
+# Rule to process raw data
+rule clean:
+    shell:
+        """
+	if [ -d raw ]; then
+      		rm -r raw
+	fi
+	"""
