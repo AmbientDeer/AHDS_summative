@@ -41,19 +41,24 @@ top_words <- word_year_counts %>%
 filtered_data <- word_year_counts %>%
   filter(word %in% top_words)
 
+# Calculate the minimum year
+min_year <- min(filtered_data$Year)
+
 # Plot changes in word frequency over time
 gg <- ggplot(filtered_data, aes(x = Year, y = frequency, color = word)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +  # Updated to use `linewidth`
   labs(
     title = "Change in Word Frequency Over Time in Article Titles",
     x = "Year",
     y = "Word Frequency",
     color = "Top Words"
   ) +
+  scale_x_continuous(limits = c(min_year, 2024)) +  # Define x-axis limits
   theme_minimal() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
     axis.title = element_text(size = 12)
   )
 
-ggsave("plot/Word_Frequency_Trends.png", width = 8, height = 6)
+# Save the plot
+ggsave("plot/Word_Frequency_Trends.png", plot = gg, width = 8, height = 6)
