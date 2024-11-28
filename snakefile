@@ -1,29 +1,44 @@
+# Rule to download raw data
+rule download_data:
+    output:
+        "raw/pmids.xml"
+    shell:
+        """
+	mkdir -p raw
+	bash ./scripts/Download_data.sh
+	"""
+
+# Rule to process raw data
+rule process_data:
+    input:
+        "raw/pmids.xml"
+    output:
+        "clean/processed_articles.tsv"
+    shell:
+        """
+	mkdir -p clean
+	bash ./scripts/process_data.sh
+	"""
+
+# Rule to process titles
+rule process_titles:
+    input:
+        "clean/processed_articles.tsv"
+    output:
+        "clean/processed_articles_final.tsv"
+    script:
+        "scripts/process_titles.R"
+
+# Rule to generate word frequency visualization
+rule word_frequency_trend:
+    input:
+        "clean/processed_articles_final.tsv"
+    output:
+        "plot/Word_Frequency_Trends.png"
+    script:
+        "scripts/word_frequency_trend.R"
+
+# Workflow execution order
 rule all:
     input:
-        expand("data/raw/article-data-{pmid}.xml", pmid=range(1, 10000))
-
-rule fetch_pmids:
-    output:
-        "data/raw/pmids.xml"
-    shell:
-        """
-        curl -s "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22long%20covid%22&retmax=10000" > {output}
-        """
-
-rule fetch_articles:
-    input:
-        "data/raw/pmids.xml"
-    output:
-        "data/raw/article-data-{pmid}.xml"
-    shell:
-        """
-        pmids=$(awk -F'<Id>|</Id>' '/<Id>/{print $2}' {input})
-        echo $pmids
-        for pmid in $pmids; do
-            if [ "$pmid" == "{wildcards.pmid}" ]; then
-                echo "正在下载 PubMed ID 为: $pmid 的元数据"
-                curl "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=${pmid}" > {output}
-                sleep 1
-            fi
-        done
-        """
+	"plot/Word_Frequency_Trends.png"
