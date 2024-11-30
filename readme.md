@@ -34,7 +34,7 @@ snakemake --core 1
 We need to run rush.sh if we want to run the code in BlueCrystal.
 
 ```
-sbatch run.sh
+sbatch slurm.sh
 ```
 
 We can also run the snakemake rule by rule, the method is shown below:
