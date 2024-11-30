@@ -17,7 +17,7 @@ set -e
 echo "Job started on $(date)"  # Using $(...) for command substitution
 
 # Conda environment
-conda activate AHDS
+conda activate ahds_week9
 
 # Execute the Snakemake pipeline
 snakemake
