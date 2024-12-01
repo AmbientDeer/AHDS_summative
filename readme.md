@@ -11,17 +11,26 @@ downloading the data, extracting the specific columns, cleaning the titles and a
 Linux
 R enviroment
 
+### We first need to check we have conda installed
+	```
+	source ~/initConda.sh
+	```
+
 ### Set up the enviroment
 
 1. Clone the repository:
 	```
-	git clone 
+	git clone https://github.com/AmbientDeer/AHDS_summative.git 
+	```
+2.Make sure we go in the right directory called AHDS_summative
+	```
+	cd AHDS_summative
 	```
 
-2. Activate our enviroment
+3. Activate our enviroment
 	```
-	conda env create -f enviroment.yml
-	conda activate snakemake-practice
+	conda env create -f environment.yml
+	conda activate AHDS
 	```
 
 ### Run the programe
@@ -31,7 +40,7 @@ We use snakemake to excute the scripts in the correct order:
 snakemake --core 1
 ```
 
-We need to run rush.sh if we want to run the code in BlueCrystal.
+We can aso run slurm.sh if we want to submit a job in BlueCrystal.
 
 ```
 sbatch slurm.sh

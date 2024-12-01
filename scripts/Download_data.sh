@@ -2,7 +2,7 @@ mkdir -p "raw"
 
 echo "finish mkdir"
 
-PMID_URL="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22long%20covid%22&retmax=5" 
+PMID_URL="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22long%20covid%22&retmax=10000" 
 
 
 PMID_FILE="raw/pmids.xml"
