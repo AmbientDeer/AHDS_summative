@@ -201,7 +201,7 @@ dependencies:
   - r-httr2=1.0.6
   - r-hunspell=3.0.5
   - r-ids=1.0.1
- - r-ini=0.3.1
+  - r-ini=0.3.1
   - r-isoband=0.2.7
   - r-isocodes=2024.02.12
   - r-janeaustenr=1.0.0
